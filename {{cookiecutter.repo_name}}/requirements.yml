@@ -1,5 +1,6 @@
 # Install a role from the Ansible Galaxy
 - src: hadenlabs.ntp
+- src: hadenlabs.nodejs
 
 # Install a role from GitHub
 
