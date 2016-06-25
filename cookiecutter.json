@@ -1,0 +1,15 @@
+{
+  "project_name" : "My Laravel Project",
+  "repo_name" : "mylaravelproject",
+  "repo_url" : "http://.........",
+	"description" : "description of the project",
+	"version" : "0.0.0",
+	"author_name" : "Your Name",
+  "copyright" : "My Company",
+  "developmen_server_listen_ip" : "127.0.0.1",
+  "development_server_port" : 10001,
+  "use_mkdocs" : "y",
+  "documentation_server_listen_ip" : "127.0.0.1",
+  "documentation_server_port" : 10080,
+  "documentation_theme" : "readthedocs"
+}
