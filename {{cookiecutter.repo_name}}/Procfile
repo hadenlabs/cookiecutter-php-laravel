@@ -1,0 +1,1 @@
+web: php ./artisan serve --host={{cookiecutter.developmen_server_listen_ip}} --port={{cookiecutter.development_server_port}}
