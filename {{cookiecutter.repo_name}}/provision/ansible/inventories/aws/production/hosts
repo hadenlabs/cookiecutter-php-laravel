@@ -1,23 +1,23 @@
-1.web.{{project_name}}.vm ansible_ssh_host=52.39.180.62 ansible_ssh_port=22 ansible_ssh_private=172.31.32.115
-1.db.master.{{project_name}}.vm ansible_ssh_host=52.39.180.62 ansible_ssh_port=22 ansible_ssh_private=172.31.32.115
+1.web.{{cookiecutter.project_name}}.vm ansible_ssh_host=52.39.180.62 ansible_ssh_port=22 ansible_ssh_private=172.31.32.115
+1.db.master.{{cookiecutter.project_name}}.vm ansible_ssh_host=52.39.180.62 ansible_ssh_port=22 ansible_ssh_private=172.31.32.115
 
 # Groups
 
 [webservers]
-1.web.{{project_name}}.vm
+1.web.{{cookiecutter.project_name}}.vm
 
 [lbservers]
-1.web.{{project_name}}.vm
+1.web.{{cookiecutter.project_name}}.vm
 
 [dbservers:children]
 dbservers.masters
 dbservers.slaves
 
 [dbservers.masters]
-1.db.master.{{project_name}}.vm
+1.db.master.{{cookiecutter.project_name}}.vm
 
 [dbservers.slaves]
-# 1.db.slave.{{project_name}}.vm
+# 1.db.slave.{{cookiecutter.project_name}}.vm
 
 [cacheservers]
-1.db.master.{{project_name}}.vm
+1.db.master.{{cookiecutter.project_name}}.vm
