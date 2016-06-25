@@ -1,6 +1,7 @@
 # Install a role from the Ansible Galaxy
 - src: hadenlabs.ntp
 - src: hadenlabs.nodejs
+- src: dgnest.postgresql
 
 # Install a role from GitHub
 
