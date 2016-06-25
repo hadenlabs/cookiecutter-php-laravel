@@ -1,0 +1,31 @@
+---
+# Ansible playbook for a {{project_name}}
+#
+
+- name: Common stuff for all the server
+  hosts: all
+  sudo: True
+  gather_facts: True
+  roles:
+    - contrib/hadenlabs.ntp
+  tags:
+    - all
+    - common
+
+- name: execute roles dependences
+  hosts: webservers
+  gather_facts: True
+  sudo: True
+  roles:
+    - { role: contrib/hadenlabs.nodejs, when: "user == 'vagrant'" }
+
+- name: Install PostgreSQL
+  hosts: dbservers
+  gather_facts: True
+  sudo: True
+  roles:
+    - contrib/dgnest.postgresql
+  tags:
+    - install
+    - databases
+    - postgresql

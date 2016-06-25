@@ -1,0 +1,95 @@
+---
+
+python_pyenv_path: "{{ home }}/pyenv"
+python_pyenv_owner: "{{ user }}"
+python_pyenv_update_git_install: yes
+python_pyenv_python_versions:
+  - "3.5.1"
+  - "2.7.10"
+
+python_pyenv_virtualenvs:
+  - venv_name: "ventorystack"
+    py_version: "3.5.1"
+
+python_pyenv_virtualenvs_default: "ventorystack"
+virtualenv_path: "{{ python_pyenv_path }}/versions/{{ python_pyenv_virtualenvs_default }}"
+
+python_pyenv_file_requeriments: "{{ apps_path }}/requirements.txt"
+
+python_environment_dict:
+  MIXPANEL_PROJECT_TOKEN: "{{mixpanel_project_token}}"
+  IS_SECURE: 'True'
+  DEBUG: "{{ debug }}"
+  SECRET_KEY: "cj36%5df7q5+ov)wz+(=vt7d81ka^xx!5%0)nx=z2i&)*5r^"
+  DB_URL: "postgres://{{ postgresql_user }}:{{ postgresql_pass }}@{{ ip_server_database }}:{{ postgresql_port }}/{{ postgresql_database_name }}"
+  DB_TEST_URL: "postgres://{{ postgresql_user }}:{{ postgresql_pass }}@{{ ip_server_database }}:{{ postgresql_port }}/{{ postgresql_database_test_name }}"
+  SITE_DOMAIN: "{{ site_domain }}"
+  SITE_NAME: "ventorystack"
+  MEDIA_URL: "/media"
+  STATIC_URL: "/static"
+  BASE_URL: "/media"
+  CF_API_EMAIL: "{{ cloudflare_purge_email }}"
+  CF_API_KEY: "{{ cloudflare_purge_key }}"
+  CF_API_CERTKEY: "v1.0-ad067a3b3a07766c3ab0ea1f8a32620d9a067b48e25008cb331af09eef1842ad-0d54f1792caf40e912579bbc3cf836195af8f656eb04afb13677e55cb27c6242c07e5df09daccecf83aad7ca3a45604618e3af097bac1b7453d3ebfedef48617-a06ecadfddc4e1c2cd7378d8c45406158208a2d0854e18a4e1cce8fd61328ef5"
+  CF_ZONE_NAME: "{{ site_domain }}"
+  CF_ZONE_ID: "{{ cloudflare_purge_zone }}"
+  IP_SERVER: "52.39.180.62"
+  OPBEAT_ORGANIZATION_ID: "{{ opbeat_organization_id }}"
+  OPBEAT_APP_ID: "{{ opbeat_app_id }}"
+  OPBEAT_SECRET_TOKEN: "{{ opbeat_secret_token }}"
+
+
+common_package_dependencies:
+  - "gettext" # package translate ubuntu
+
+
+# Services
+services_states:
+  - name: "nginx"
+    state: "reloaded"
+
+
+uwsgi_dict:
+    project: "{{ app_name }}"
+    base: "{{ app_dir_home }}"
+    chdir: "{{ app_dir }}"
+    home: "{{ virtualenv_path }}"
+    pythonpath: "{{ app_dir }}"
+    socket: "{{ app_proxypass }}"
+    module: "{{ app_module }}"
+    uid: "{{ user }}"
+    gid: "{{ user }}"
+    master: true
+    vacuum: true
+    virtualenv: "{{ virtualenv_path }}"
+    max_requests: 20000
+    processes: 1
+    threads: 2
+    enable_threads: true
+    # http: ":3097"
+    # touch_reload: "/path/touch/reload"
+    # harakiri: 30
+    # harakiri_verbose: True
+    log_x_forwarded_for: true
+    # stats: "127.0.0.1:9000"
+    log_5xx: true
+    log_slow: 30000
+    # shared_socket: ":80"
+    buffer_size: "8096"
+
+supervisor_programs:
+  - program: uwsgi
+    command: "{{ app_dir_home }}/uwsgi.sh"
+    user: "{{user}}"
+    numprocs: 1
+    instalautostart: true
+    autorestart: true
+    startsecs: 10
+    priority: 990
+
+# Nginx
+nginx_project_name: "{{ app_name }}"
+nginx_port: "{{ port_http }}"
+nginx_uwsgi_enabled: True
+nginx_path_static: "{{ app_dir_static }}"
+nginx_path_media: "{{ app_dir_media }}"

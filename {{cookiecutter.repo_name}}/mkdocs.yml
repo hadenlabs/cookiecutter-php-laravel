@@ -1,0 +1,6 @@
+site_name: {{cookiecutter.project_name}}
+copyright: {{cookiecutter.copyright}}
+repo_url: {{cookiecutter.repo_url}}
+site_dir: doc-site
+dev_addr: {{cookiecutter.documentation_server_listen_ip}}:{{cookiecutter.documentation_server_port}}
+theme: {{cookiecutter.documentation_theme}}

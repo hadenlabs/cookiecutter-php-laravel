@@ -1,0 +1,10 @@
+# Install a role from the Ansible Galaxy
+- src: hadenlabs.ntp
+- src: hadenlabs.nodejs
+- src: dgnest.postgresql
+
+# Install a role from GitHub
+
+# - name: hadenlabs.superslacker
+#   src: https://github.com/hadenlabs/ansible-role-superslacker
+#   version: origin/master

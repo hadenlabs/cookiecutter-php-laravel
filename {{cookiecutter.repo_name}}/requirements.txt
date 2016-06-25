@@ -1,0 +1,2 @@
+Markdown==2.6.6
+opbeat>=3.3.3

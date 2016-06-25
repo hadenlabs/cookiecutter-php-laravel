@@ -1,0 +1,31 @@
+# Environment Values, use .env.example
+.env
+
+# Compiled Documentation
+doc-site
+
+# Composer Vendor Files
+/vendor
+
+# Node Modules
+/node_modules
+
+# IDE
+.idea
+
+# Local Development VM
+.vagrant
+
+# Compiled Python files
+*.pyc
+
+/logs
+
+# Node metadata
+node_modules
+
+# SASS metadata
+*.sass-cache
+
+# Bower directory
+bower_components
