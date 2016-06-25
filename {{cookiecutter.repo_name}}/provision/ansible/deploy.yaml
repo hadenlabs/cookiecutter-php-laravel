@@ -1,0 +1,11 @@
+---
+
+- name: Deploy Application
+  hosts: webservers
+  sudo: True
+  roles:
+    - contrib/hadenlabs.ntp
+  tags:
+    - webserver
+    - wait
+    - deployment
