@@ -1,6 +1,6 @@
 ---
 
-name_project: {{project_name}}
+name_project: {{cookiecutter.project_name}}
 name_inventory: stage
 path_inventory: provision/ansible/inventories/sandbox/production
 vagrant:
@@ -9,9 +9,9 @@ vagrant:
   sudo: true
 
 servers:
-  - name: 1.web.{{project_name}}.vm
+  - name: 1.web.{{cookiecutter.project_name}}.vm
     ip: 10.10.10.20
     box: ubuntu-14.4
     url: https://github.com/kraksoft/vagrant-box-ubuntu/releases/download/14.04/ubuntu-14.04-amd64.box
-    hostname: 1-web-{{project_name}}.vm
+    hostname: 1-web-{{cookiecutter.project_name}}.vm
     ram: 512

@@ -1,5 +1,5 @@
 ---
-# Ansible playbook for a {{project_name}}
+# Ansible playbook for a {{cookiecutter.project_name}}
 #
 
 - name: Common stuff for all the server
